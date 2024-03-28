@@ -9,7 +9,11 @@ import React, {
 const GlobalContext = createContext();
 
 const LOADING = "LOADING";
+const GET_POKEMON = "GET_POKEMON";
 const GET_ALL_POKEMON = "GET_ALL_POKEMON";
+const GET_SEARCH = "GET_SEARCH";
+const GET_POKEMON_DATABASE = "GET_POKEMON_DATABASE";
+const NEXT = "NEXT";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -23,6 +27,10 @@ const reducer = (state, action) => {
                 next: action.payload.next,
                 loading: false,
             };
+
+        case GET_POKEMON:
+            return { ...state, pokemon: action.payload, loading: false };
+
     }
 
     return state;
@@ -46,9 +54,8 @@ export const GlobalProvider = ({ children }) => {
     const allPokemon = async () => {
         dispatch({ type: "LOADING" });
 
-        const res = await fetch(`${baseUrl}pokemon?limit=20`);
+        const res = await fetch(`${baseUrl}pokemon?limit=200`);
         const data = await res.json();
-        console.log(data);
         dispatch({ type: "GET_ALL_POKEMON", payload: data });
 
         const allPokemonData = [];
@@ -60,6 +67,15 @@ export const GlobalProvider = ({ children }) => {
         }
 
         setAllPokemonData(allPokemonData);
+    };
+
+    const getPokemon = async (name) => {
+        dispatch({ type: "LOADING" });
+
+        const res = await fetch(`${baseUrl}pokemon/${name}`);
+        const data = await res.json();
+
+        dispatch({ type: "GET_POKEMON", payload: data });
     };
 
     useEffect(() => {

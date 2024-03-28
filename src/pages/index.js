@@ -22,7 +22,10 @@ export default function Home() {
                             >
                                 <div className="card-image">
                                     <img
-                                        src={pokemon.sprites.other.home.front_shiny}
+                                        src={pokemon.sprites.other.dream_world.front_default}
+                                        /*pokemon.sprites.other.dream_world.front_default*/
+                                        /*pokemon.sprites.other.home.front_default*/
+                                        /*pokemon.sprites.other.home.front_shiny*/
                                         alt={pokemon.name}
                                     />
                                 </div>
