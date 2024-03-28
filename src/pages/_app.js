@@ -1,7 +1,7 @@
-import "@/styles/Global.scss";
-import {GlobalProvider} from "@/context/Global";
+import { GlobalProvider } from "@/context/global";
+import "@/styles/globals.css";
 
-export default function App({Component, pageProps}) {
+export default function App({ Component, pageProps }) {
     return (
         <>
             <GlobalProvider>
